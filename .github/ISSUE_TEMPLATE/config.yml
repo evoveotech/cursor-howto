@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Cursor Documentation
+    url: https://docs.cursor.com/docs/en/overview
+    about: Official Cursor documentation
+  - name: Discussions
+    url: https://github.com/evoveotech/cursor-howto/discussions
+    about: Ask questions and share ideas with the community
+  - name: MCP Servers
+    url: https://github.com/modelcontextprotocol/servers
+    about: Reference MCP server implementations
