@@ -22,6 +22,8 @@ Go from first launch to orchestrating agents, reusable prompts, skills, and MCP 
 
 *Built and maintained by **Evoveo Tech** (**EVOVEO INNOVATIONS LIMITED**).*
 
+*Structure and learning approach inspired by [luongnv89/claude-howto](https://github.com/luongnv89/claude-howto).*
+
 **Scope:** This guide targets the **Cursor IDE** (editor), in-app **Cursor** agent/chat workflows, and the **Cursor CLI** where documented. Module layouts (e.g. `.cursor/commands/`, `CURSOR.md`) are **tutorial conventions**; map them to **Rules**, **`AGENTS.md`**, and **Cursor Settings** as described in [docs/CURSOR_SCOPE.md](docs/CURSOR_SCOPE.md) and the [official docs](https://docs.cursor.com).
 
 **[Get Started in 15 Minutes](#get-started-in-15-minutes)** | **[Find Your Level](#not-sure-where-to-start)** | **[Browse the Feature Catalog](CATALOG.md)**
@@ -852,7 +854,7 @@ Quick start:
 
 - [Cursor Documentation](https://docs.cursor.com/docs/en/overview)
 - [MCP Protocol Specification](https://modelcontextprotocol.io)
-- [Skills Repository](https://github.com/evoveotech/skills) - Collection of ready-to-use skills
+- [Evoveo Tech on GitHub](https://github.com/evoveotech) — organization home; additional skills and tooling appear here when published
 - [Boris Cherny on agentic coding workflows](https://x.com/bcherny/status/2007179832300581177) — parallel agents, shared project memory, Plan mode, slash commands, subagents, and verification hooks for long-running sessions.
 
 </details>

@@ -788,15 +788,15 @@ Package skills in a plugin's `skills/` directory for broader distribution.
 
 Once you start building skills seriously, two things become essential: a library of proven skills and a tool to manage them.
 
-**[evoveotech/skills](https://github.com/evoveotech/skills)** — A collection of skills I use daily across almost all my projects. Highlights include `logo-designer` (generates project logos on the fly) and `ollama-optimizer` (tunes local LLM performance for your hardware). Great starting point if you want ready-to-use skills.
+**evoveotech/skills** — A skills collection pattern for daily use across projects (examples: `logo-designer`, `ollama-optimizer`). When published, it will live under **[Evoveo Tech on GitHub](https://github.com/evoveotech)**.
 
-**[evoveotech/asm](https://github.com/evoveotech/asm)** — Agent Skill Manager. Handles skill development, duplicate detection, and testing. The `asm link` command lets you test a skill in any project without copying files around — essential once you have more than a handful of skills.
+**evoveotech/asm** (Agent Skill Manager) — Skill development, duplicate detection, and testing; the `asm link` command tests a skill in any project without copying files. Watch **[Evoveo Tech](https://github.com/evoveotech)** for releases.
 
 ## Additional Resources
 
 - [Official Skills Documentation](https://docs.cursor.com/docs/en/skills)
 - [Cursor documentation — Rules and context](https://docs.cursor.com/context/rules)
-- [Skills Repository](https://github.com/evoveotech/skills) - Collection of ready-to-use skills
+- [Evoveo Tech on GitHub](https://github.com/evoveotech) — organization home for skills and tooling
 - [Slash Commands Guide](../01-slash-commands/) - User-initiated shortcuts
 - [Subagents Guide](../04-subagents/) - Delegated AI agents
 - [Memory Guide](../02-memory/) - Persistent context
