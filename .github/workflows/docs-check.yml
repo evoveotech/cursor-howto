@@ -65,7 +65,7 @@ jobs:
           enable-cache: true
 
       - name: Run link check
-        run: uv run --project scripts scripts/check_links.py
+        run: uv run --project scripts --frozen scripts/check_links.py
         env:
           LINK_CHECK_STRICT: "1"
 
@@ -90,7 +90,7 @@ jobs:
         run: npm install -g @mermaid-js/mermaid-cli
 
       - name: Validate Mermaid diagrams
-        run: uv run --project scripts scripts/check_mermaid.py
+        run: uv run --project scripts --frozen scripts/check_mermaid.py
         env:
           MERMAID_PUPPETEER_NO_SANDBOX: "true"
 
@@ -107,7 +107,7 @@ jobs:
           enable-cache: true
 
       - name: Validate cross-references
-        run: uv run --project scripts scripts/check_cross_references.py
+        run: uv run --project scripts --frozen scripts/check_cross_references.py
 
   summary:
     name: Summary

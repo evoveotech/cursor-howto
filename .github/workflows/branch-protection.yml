@@ -1,44 +1,37 @@
-name: Branch Protection Check
+name: Block Direct Push to Main
 
-# This workflow acts as a CI-level backup to GitHub's branch protection settings.
-# It fails on any direct push to main that doesn't come from a PR,
-# providing an audit trail even if settings are accidentally changed.
+# CI-level backup to GitHub branch protection settings.
+# Uses the GitHub API to reliably detect whether a commit SHA came from a PR.
+# Works for all merge strategies: merge commit, squash, and rebase.
 
 on:
   push:
     branches: [main]
 
+permissions:
+  contents: read
+  pull-requests: read
+
 jobs:
   verify-pr-merge:
     name: Verify PR Merge
     runs-on: ubuntu-latest
-    # Only run if this push came from a merge commit in a PR
-    if: github.event_name == 'push' && contains(github.event.head_commit.message, 'Merge pull request')
-
     steps:
-      - name: Confirm PR merge
-        run: |
-          echo "✅ Confirmed: This push is from a merged pull request"
-          echo "Commit: ${{ github.event.head_commit.message }}"
-          echo "Author: ${{ github.event.head_commit.author.name }}"
+      - name: Check if commit came from a pull request
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: pulls } = await github.rest.repos.listPullRequestsAssociatedWithCommit({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              commit_sha: context.sha
+            });
 
-  block-direct-push:
-    name: Block Direct Push
-    runs-on: ubuntu-latest
-    # Run if this is a direct push (not a PR merge)
-    if: github.event_name == 'push' && !contains(github.event.head_commit.message, 'Merge pull request')
-
-    steps:
-      - name: Fail on direct push to main
-        run: |
-          echo "❌ Direct pushes to main are not allowed."
-          echo ""
-          echo "To contribute:"
-          echo "  1. git checkout -b feature/your-change"
-          echo "  2. Make your changes and commit"
-          echo "  3. git push origin feature/your-change"
-          echo "  4. Open a pull request to main"
-          echo ""
-          echo "Commit that was rejected:"
-          echo "  ${{ github.event.head_commit.message }}"
-          exit 1
+            if (pulls.length === 0) {
+              core.setFailed(
+                'Direct push to main detected. All changes must go through a pull request.'
+              );
+            } else {
+              const prNumbers = pulls.map(p => `#${p.number}`).join(', ');
+              core.info(`✅ Verified: Commit is from PR ${prNumbers}`);
+            }
