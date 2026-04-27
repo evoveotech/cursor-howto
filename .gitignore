@@ -72,8 +72,8 @@ build/
 .coverage
 htmlcov/
 
-# uv lockfile
-uv.lock
+# Allow uv.lock to be committed for reproducible CI builds
+# (uv.lock intentionally NOT ignored — needed for GitHub Actions)
 blog-post/
 openspec/
 .opencode/

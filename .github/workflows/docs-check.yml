@@ -10,7 +10,6 @@ on:
       - '.markdownlint.json'
       - 'scripts/check_*.py'
       - 'scripts/lib/*.py'
-      - 'scripts/uv.lock'
   pull_request:
     branches: [main]
     paths:
