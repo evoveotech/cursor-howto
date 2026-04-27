@@ -391,6 +391,7 @@ def get_chapter_order() -> list[tuple[str, str]]:
     """Define the order of chapters based on folder structure."""
     return [
         ("README.md", "Introduction"),
+        ("00-instant-wins", "Instant Wins"),
         ("LEARNING-ROADMAP.md", "Learning Roadmap"),
         ("QUICK_REFERENCE.md", "Quick Reference"),
         ("cursor_concepts_guide.md", "Cursor Concepts Guide"),
@@ -403,6 +404,8 @@ def get_chapter_order() -> list[tuple[str, str]]:
         ("07-plugins", "Plugins"),
         ("08-checkpoints", "Checkpoints"),
         ("09-advanced-features", "Advanced Features"),
+        ("stacks", "Installable Stacks"),
+        ("war-stories", "War Stories"),
         ("resources.md", "Resources"),
     ]
 

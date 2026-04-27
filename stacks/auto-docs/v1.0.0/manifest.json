@@ -1,0 +1,16 @@
+{
+  "stack_id": "auto-docs",
+  "version": "1.0.0",
+  "name": "Auto Documentation Generator",
+  "description": "Generate API docs, README updates, and changelogs from code. Never write documentation manually again.",
+  "requires": {
+    "cursor_version": "2.1+"
+  },
+  "installs": {
+    "commands": ["docs.md", "changelog.md"],
+    "skills": ["doc-generator.md"],
+    "memory": ["docs-style.md"]
+  },
+  "test_command": "/docs",
+  "estimated_setup_seconds": 30
+}

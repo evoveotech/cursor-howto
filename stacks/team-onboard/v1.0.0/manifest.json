@@ -1,0 +1,15 @@
+{
+  "stack_id": "team-onboard",
+  "version": "1.0.0",
+  "name": "Team Onboarding System",
+  "description": "Project memory and standards that make new team members productive with Cursor on day 1. No more 'Cursor doesn't understand our stack.'",
+  "requires": {
+    "cursor_version": "2.1+"
+  },
+  "installs": {
+    "commands": ["onboard.md", "explain.md"],
+    "memory": ["project.md", "standards.md"]
+  },
+  "test_command": "/onboard",
+  "estimated_setup_seconds": 45
+}

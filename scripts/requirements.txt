@@ -1,7 +1,7 @@
 # Core dependencies for build_epub.py
-ebooklib
-markdown
-beautifulsoup4
-httpx
-pillow
-tenacity
+ebooklib>=0.18
+markdown>=3.5
+beautifulsoup4>=4.12
+httpx>=0.27
+pillow>=10.0
+tenacity>=8.2

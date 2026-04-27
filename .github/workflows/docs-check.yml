@@ -32,6 +32,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          enable-cache: true
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -50,13 +55,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
         with:
-          python-version: '3.11'
+          enable-cache: true
 
       - name: Run link check
-        run: python scripts/check_links.py
+        run: uv run --no-project scripts/check_links.py
         env:
           LINK_CHECK_STRICT: "1"
 
@@ -67,6 +72,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          enable-cache: true
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -75,13 +85,8 @@ jobs:
       - name: Install mermaid CLI
         run: npm install -g @mermaid-js/mermaid-cli
 
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
-
       - name: Validate Mermaid diagrams
-        run: python scripts/check_mermaid.py
+        run: uv run --no-project scripts/check_mermaid.py
         env:
           MERMAID_PUPPETEER_NO_SANDBOX: "true"
 
@@ -92,13 +97,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
         with:
-          python-version: '3.11'
+          enable-cache: true
 
       - name: Validate cross-references
-        run: python scripts/check_cross_references.py
+        run: uv run --no-project scripts/check_cross_references.py
 
   summary:
     name: Summary

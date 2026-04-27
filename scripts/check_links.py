@@ -9,16 +9,9 @@ import urllib.request
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
-IGNORE_DIRS = {
-    ".venv",
-    "node_modules",
-    ".git",
-    "blog-posts",
-    "openspec",
-    "prompts",
-    ".agents",
-    ".cursor",
-}
+sys.path.insert(0, str(Path(__file__).parent))
+
+from lib.discovery import iter_md_files
 TIMEOUT = 10
 # Domains/patterns to skip: badges, placeholders, and bot-blocking hosts
 SKIP_DOMAINS = {
@@ -51,7 +44,7 @@ URL_RE = re.compile(r"https?://[a-zA-Z0-9][a-zA-Z0-9\-._~:/?#\[\]@!$&'()*+,;=%]+
 
 def is_skipped(url: str) -> bool:
     try:
-        domain = url.split("/")[2]
+        domain = url.split("/", maxsplit=3)[2].split(":", maxsplit=1)[0]
     except IndexError:
         return True  # malformed URL
     # Repository may be private or unpublished — do not fail link check on GitHub 404.
@@ -94,11 +87,7 @@ def check_url(url: str, _depth: int = 0) -> tuple[str, bool, str]:
 def main(strict: bool = False) -> int:
     urls: dict[str, list[str]] = {}  # url -> [file, ...]
 
-    md_files = [
-        f
-        for f in Path().rglob("*.md")
-        if not any(part in IGNORE_DIRS for part in f.parts)
-    ]
+    md_files = iter_md_files()
 
     for file_path in md_files:
         content = file_path.read_text(encoding="utf-8")

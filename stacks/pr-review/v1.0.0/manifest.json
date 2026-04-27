@@ -1,0 +1,20 @@
+{
+  "stack_id": "pr-review",
+  "version": "1.0.0",
+  "name": "AI Code Review Pipeline",
+  "description": "Complete AI-powered code review system. Install 2 slash commands, 2 subagents, 1 MCP config, and 1 hook. Type /review on any code.",
+  "requires": {
+    "cursor_version": "2.1+",
+    "mcp_servers": ["github"],
+    "env_vars": ["GITHUB_TOKEN"]
+  },
+  "installs": {
+    "commands": ["review.md", "security-scan.md"],
+    "agents": ["code-reviewer.md", "test-engineer.md"],
+    "mcp": ["github.json"],
+    "hooks": ["pre-review.sh"],
+    "memory": ["review-standards.md"]
+  },
+  "test_command": "/review",
+  "estimated_setup_seconds": 60
+}

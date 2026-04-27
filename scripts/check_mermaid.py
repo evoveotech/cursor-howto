@@ -10,7 +10,9 @@ import sys
 import tempfile
 from pathlib import Path
 
-IGNORE_DIRS = {".venv", "node_modules", ".git", "blog-posts", ".agents"}
+sys.path.insert(0, str(Path(__file__).parent))
+
+from lib.discovery import iter_md_files
 
 
 def main() -> int:
@@ -35,24 +37,22 @@ def main() -> int:
             puppeteer_config_path = pcfg.name
         extra_args = ["-p", puppeteer_config_path]
 
-    md_files = [
-        f
-        for f in Path().rglob("*.md")
-        if not any(part in IGNORE_DIRS for part in f.parts)
-    ]
+    md_files = iter_md_files()
 
     try:
         for file_path in md_files:
             content = file_path.read_text(encoding="utf-8")
             blocks = re.findall(r"```mermaid\n(.*?)```", content, re.DOTALL)
             for i, block in enumerate(blocks):
-                with tempfile.NamedTemporaryFile(
-                    suffix=".mmd", mode="w", delete=False
-                ) as tmp:
-                    tmp.write(block)
-                    tmp_path = tmp.name
-                out_path = str(Path(tmp_path).with_suffix(".svg"))
+                tmp_path: str | None = None
+                out_path: str | None = None
                 try:
+                    with tempfile.NamedTemporaryFile(
+                        suffix=".mmd", mode="w", delete=False
+                    ) as tmp:
+                        tmp.write(block)
+                        tmp_path = tmp.name
+                    out_path = str(Path(tmp_path).with_suffix(".svg"))
                     result = subprocess.run(  # nosec B603 B607
                         ["mmdc", "-i", tmp_path, "-o", out_path, *extra_args],
                         capture_output=True,
@@ -66,8 +66,10 @@ def main() -> int:
                     else:
                         checked += 1
                 finally:
-                    Path(tmp_path).unlink(missing_ok=True)
-                    Path(out_path).unlink(missing_ok=True)
+                    if tmp_path is not None:
+                        Path(tmp_path).unlink(missing_ok=True)
+                    if out_path is not None:
+                        Path(out_path).unlink(missing_ok=True)
     finally:
         if puppeteer_config_path:
             Path(puppeteer_config_path).unlink(missing_ok=True)

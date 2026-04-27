@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "description": "Installable, versioned Cursor workflow stacks. Each stack is a complete, tested configuration you copy into your project in one step.",
+  "stacks": [
+    {
+      "id": "pr-review",
+      "name": "AI Code Review Pipeline",
+      "description": "Automated PR review with security scans, test analysis, and GitHub integration. Replaces manual code review with AI agents.",
+      "tags": ["code-review", "security", "github", "team"],
+      "latest_version": "1.0.0",
+      "estimated_setup_seconds": 60,
+      "time_saved_per_week_hours": 3,
+      "versions": ["1.0.0"]
+    },
+    {
+      "id": "team-onboard",
+      "name": "Team Onboarding System",
+      "description": "Project memory + standards + onboarding commands. New team members are productive with Cursor on day 1.",
+      "tags": ["onboarding", "memory", "standards", "team"],
+      "latest_version": "1.0.0",
+      "estimated_setup_seconds": 45,
+      "time_saved_per_week_hours": 2,
+      "versions": ["1.0.0"]
+    },
+    {
+      "id": "auto-docs",
+      "name": "Auto Documentation Generator",
+      "description": "Generate API docs, README updates, and changelogs from code automatically. Never write docs manually again.",
+      "tags": ["documentation", "api", "automation"],
+      "latest_version": "1.0.0",
+      "estimated_setup_seconds": 30,
+      "time_saved_per_week_hours": 2,
+      "versions": ["1.0.0"]
+    }
+  ]
+}
