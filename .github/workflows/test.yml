@@ -6,15 +6,11 @@ on:
     paths:
       - 'scripts/**'
       - '.github/workflows/test.yml'
-      - 'pyproject.toml'
-      - 'requirements*.txt'
   pull_request:
     branches: [main]
     paths:
       - 'scripts/**'
       - '.github/workflows/test.yml'
-      - 'pyproject.toml'
-      - 'requirements*.txt'
 
 # Cancel in-progress runs for the same branch
 concurrency:
@@ -42,13 +38,11 @@ jobs:
       - name: Set up Python ${{ matrix.python-version }}
         run: uv python install ${{ matrix.python-version }}
 
-      - name: Create venv and install dependencies
-        run: |
-          uv venv
-          uv pip install -r scripts/requirements-dev.txt
+      - name: Sync dependencies from lock file
+        run: uv sync --project scripts
 
       - name: Run pytest
-        run: uv run pytest scripts/tests/ -v --tb=short --cov=scripts --cov-report=xml --cov-report=html
+        run: uv run --project scripts pytest scripts/tests/ -v --tb=short --cov=scripts --cov-report=xml --cov-report=html
         continue-on-error: false
 
       - name: Upload coverage to Codecov
@@ -85,17 +79,15 @@ jobs:
       - name: Set up Python
         run: uv python install 3.11
 
-      - name: Create venv and install Ruff
-        run: |
-          uv venv
-          uv pip install ruff
+      - name: Sync dependencies from lock file
+        run: uv sync --project scripts
 
       - name: Ruff Format Check
-        run: uv run ruff format --check scripts/
+        run: uv run --project scripts ruff --config scripts/pyproject.toml format --check scripts/
         continue-on-error: true
 
       - name: Ruff Lint Check
-        run: uv run ruff check scripts/
+        run: uv run --project scripts ruff --config scripts/pyproject.toml check scripts/
         continue-on-error: true
 
   security:
@@ -113,13 +105,11 @@ jobs:
       - name: Set up Python
         run: uv python install 3.11
 
-      - name: Create venv and install Bandit
-        run: |
-          uv venv
-          uv pip install "bandit[toml]"
+      - name: Sync dependencies from lock file
+        run: uv sync --project scripts
 
       - name: Run Bandit Security Scan
-        run: uv run bandit -c pyproject.toml -r scripts/ --exclude scripts/tests/ -f json -o bandit-report.json
+        run: uv run --project scripts bandit -c scripts/pyproject.toml -r scripts/ --exclude scripts/tests/ -f json -o bandit-report.json
         continue-on-error: true
 
       - name: Upload security report
@@ -145,13 +135,11 @@ jobs:
       - name: Set up Python
         run: uv python install 3.11
 
-      - name: Create venv and install mypy
-        run: |
-          uv venv
-          uv pip install -r scripts/requirements-dev.txt mypy
+      - name: Sync dependencies from lock file
+        run: uv sync --project scripts
 
       - name: Run mypy
-        run: uv run mypy scripts/ --ignore-missing-imports --no-implicit-optional
+        run: uv run --project scripts mypy --config-file scripts/pyproject.toml scripts/
         continue-on-error: true
 
   build-epub:
@@ -172,13 +160,11 @@ jobs:
       - name: Set up Python
         run: uv python install 3.11
 
-      - name: Create venv and install dependencies
-        run: |
-          uv venv
-          uv pip install -r scripts/requirements-dev.txt
+      - name: Sync dependencies from lock file
+        run: uv sync --project scripts
 
       - name: Build EPUB
-        run: uv run scripts/build_epub.py
+        run: uv run --project scripts scripts/build_epub.py
 
       - name: Verify EPUB Created
         run: |

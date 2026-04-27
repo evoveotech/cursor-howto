@@ -20,7 +20,7 @@ jobs:
           enable-cache: true
 
       - name: Build EPUB
-        run: uv run scripts/build_epub.py
+        run: uv run --project scripts scripts/build_epub.py
 
       - name: Create Release
         uses: softprops/action-gh-release@v2

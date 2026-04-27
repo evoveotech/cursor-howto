@@ -37,7 +37,6 @@
 - [What Can You Build?](#-what-can-you-build-with-this)
 - [Get Started in 15 Minutes](#-get-started-in-15-minutes)
 - [Not Sure Where to Start?](#-not-sure-where-to-start)
-- [War Stories](#-war-stories)
 - [FAQ](#-faq)
 - [Contributing](#contributing)
 
@@ -118,9 +117,9 @@ How fast can you set up a working Cursor workflow? Time yourself. Submit your PR
 
 | Rank | Stack | Time | Setup Method | Submitted By |
 |------|-------|------|--------------|--------------|
-| 🥇 | PR Review | **47s** | Manual copy | [@hardikmangp](https://github.com/hardikmangp) |
-| 🥈 | Auto Docs | **52s** | Manual copy | [@hardikmangp](https://github.com/hardikmangp) |
-| 🥉 | Team Onboard | **61s** | Manual copy | [@hardikmangp](https://github.com/hardikmangp) |
+| 🥇 | PR Review | **47s** | Manual copy | evoveotech |
+| 🥈 | Auto Docs | **52s** | Manual copy | evoveotech |
+| 🥉 | Team Onboard | **61s** | Manual copy | evoveotech |
 
 **Rules:**
 1. Clone repo → copy stack → verify `/review` (or stack's test command) works
